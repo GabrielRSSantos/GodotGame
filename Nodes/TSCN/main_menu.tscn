@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjscwkqn8m03y"]
+
+[ext_resource type="Script" path="res://Nodes/GDScripts/main_menu.gd" id="1_atur5"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_atur5")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 46.0
+offset_right = 364.0
+offset_bottom = 204.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 229.0
+offset_right = 364.0
+offset_bottom = 387.0
+text = "Join"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 414.0
+offset_right = 364.0
+offset_bottom = 579.0
+text = "Start"
+
+[node name="Ip" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 229.0
+offset_right = 727.0
+offset_bottom = 260.0
+
+[node name="IpList" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 267.0
+offset_right = 727.0
+offset_bottom = 387.0
+item_count = 2
+item_0/text = "192.168.15.67"
+item_1/text = "localhost"
+
+[node name="PlayerList" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 739.0
+offset_top = 267.0
+offset_right = 1063.0
+offset_bottom = 387.0
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 48.0
+offset_right = 727.0
+offset_bottom = 71.0
+horizontal_alignment = 1
+
+[node name="Fase1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 414.0
+offset_right = 512.0
+offset_bottom = 488.0
+text = "1"
+
+[node name="Fase2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 533.0
+offset_top = 414.0
+offset_right = 639.0
+offset_bottom = 488.0
+text = "2"
+
+[node name="Fase3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 414.0
+offset_right = 770.0
+offset_bottom = 488.0
+text = "3"
+
+[node name="Fase4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 406.0
+offset_top = 505.0
+offset_right = 512.0
+offset_bottom = 579.0
+text = "4"
+
+[node name="Fase5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 533.0
+offset_top = 505.0
+offset_right = 639.0
+offset_bottom = 579.0
+text = "5"
+
+[node name="Fase6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 505.0
+offset_right = 770.0
+offset_bottom = 579.0
+text = "6"
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="item_selected" from="IpList" to="." method="_on_ip_list_item_selected"]
+[connection signal="pressed" from="Fase1" to="." method="_on_fase_1_pressed"]
