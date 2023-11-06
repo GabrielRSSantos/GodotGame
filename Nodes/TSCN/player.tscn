@@ -1,9 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://1csmgx5motsp"]
+[gd_scene load_steps=27 format=3 uid="uid://1csmgx5motsp"]
 
 [ext_resource type="Script" path="res://Nodes/GDScripts/Player.gd" id="1_rnndt"]
 [ext_resource type="Texture2D" uid="uid://q1h50ewenuxd" path="res://Sprites/Sprite Pack 1/1 - Mr. Man/Idle (16 x 16).png" id="2_iy6um"]
+[ext_resource type="Texture2D" uid="uid://ftua04u5glpj" path="res://Sprites/Sprite Pack 1/1 - Mr. Man/Falling (16 x 16).png" id="2_xhor1"]
 [ext_resource type="Texture2D" uid="uid://bu5rvydwguk0q" path="res://Sprites/Sprite Pack 1/1 - Mr. Man/Run (16 x 16).png" id="3_q4ju8"]
+[ext_resource type="Texture2D" uid="uid://cl7tty3q0epfg" path="res://Sprites/Sprite Pack 1/1 - Mr. Man/Jumping (16 x 16).png" id="4_0w6qj"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="4_ghdqq"]
+[ext_resource type="Texture2D" uid="uid://c1mxcwnxg3vp4" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_left_NORMAL.png" id="5_esu2h"]
+[ext_resource type="Texture2D" uid="uid://bjijusrhoflon" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_left_PRESSED.png" id="6_4wv3m"]
+[ext_resource type="Texture2D" uid="uid://ba1iymnmxrkrt" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_right_NORMAL.png" id="7_56hyh"]
+[ext_resource type="Texture2D" uid="uid://cyel64hg8u2wf" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_right_PRESSED.png" id="8_mfodg"]
+[ext_resource type="Texture2D" uid="uid://co7fglq5wnpcg" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_up_NORMAL.png" id="9_d662t"]
+[ext_resource type="Texture2D" uid="uid://4edwehttfaj2" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_up_PRESSED.png" id="10_tjs01"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wrey6"]
 properties/0/path = NodePath(".:position")
@@ -67,6 +75,14 @@ region = Rect2(80, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_xhor1")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_daur5")
 }, {
 "duration": 1.0,
@@ -80,6 +96,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0w6qj")
+}],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -107,7 +131,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r8p7"]
-size = Vector2(52, 110)
+size = Vector2(7, 14)
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_xs175"]
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -65)
@@ -118,31 +144,69 @@ script = ExtResource("1_rnndt")
 replication_config = SubResource("SceneReplicationConfig_wrey6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 65)
+zoom = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.25, 10)
-scale = Vector2(4.65625, 7.04688)
+position = Vector2(0, 57)
 sprite_frames = SubResource("SpriteFrames_q54l7")
-animation = &"idle"
+animation = &"falling"
 
 [node name="ColissionPlayer" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, 12.5)
+position = Vector2(0.5, 58)
 shape = SubResource("RectangleShape2D_1r8p7")
 
 [node name="Collector" type="Area2D" parent="."]
+position = Vector2(0, 42)
 collision_mask = 3
 
 [node name="CollectorCollision" type="CollisionShape2D" parent="Collector"]
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_1r8p7")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="Analogico" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Virtual joystick left" parent="UI" instance=ExtResource("4_ghdqq")]
+[node name="Analogico_left" parent="Analogico" instance=ExtResource("4_ghdqq")]
 offset_left = 29.0
 offset_top = -252.0
 offset_right = 269.0
 offset_bottom = -38.0
+use_input_actions = false
+
+[node name="Direcional" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="left" type="TouchScreenButton" parent="Direcional"]
+position = Vector2(30, 523)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_esu2h")
+texture_pressed = ExtResource("6_4wv3m")
+action = "ui_left"
+
+[node name="right" type="TouchScreenButton" parent="Direcional"]
+position = Vector2(160, 523)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("7_56hyh")
+texture_pressed = ExtResource("8_mfodg")
+action = "ui_right"
+
+[node name="up" type="TouchScreenButton" parent="Direcional"]
+position = Vector2(997, 403)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("9_d662t")
+texture_pressed = ExtResource("10_tjs01")
+action = "ui_up"
+
+[node name="down" type="TouchScreenButton" parent="Direcional"]
+position = Vector2(1090, 619)
+rotation = 3.14159
+scale = Vector2(3, 3)
+texture_normal = ExtResource("9_d662t")
+texture_pressed = ExtResource("10_tjs01")
+action = "ui_down"
+
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="UI"]
 offset_left = 43.0
@@ -151,5 +215,9 @@ offset_right = 238.0
 offset_bottom = 94.0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="teste" type="CollisionShape2D" parent="."]
+position = Vector2(7, 58)
+shape = SubResource("SeparationRayShape2D_xs175")
 
 [connection signal="area_entered" from="Collector" to="." method="_on_collector_area_entered"]

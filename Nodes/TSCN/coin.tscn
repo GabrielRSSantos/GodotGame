@@ -75,16 +75,15 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i4qyn"]
-radius = 17.0294
+radius = 8.0
 
 [node name="Coin" type="Area2D" groups=["Coin"]]
 collision_layer = 2
 script = ExtResource("1_bwjsx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2.1275, 2.3167)
 sprite_frames = SubResource("SpriteFrames_m64lj")
-animation = &"Collected"
+animation = &"Coin"
 autoplay = "Coin"
 
 [node name="CoinCollision" type="CollisionShape2D" parent="."]

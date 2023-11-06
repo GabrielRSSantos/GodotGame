@@ -34,4 +34,13 @@ func _on_ip_list_item_selected(i):
 
 func _on_fase_1_pressed():
 	GameManager.StartGame.rpc("res://Nodes/TSCN/cena_1.tscn")
+	apagarCenaAtual.rpc()
+
+func _on_fase_2_pressed():
+	GameManager.StartGame.rpc("res://Nodes/TSCN/cena_2.tscn")
+	apagarCenaAtual.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
+func apagarCenaAtual():
 	self.queue_free()
+	

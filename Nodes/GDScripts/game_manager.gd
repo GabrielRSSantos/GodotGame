@@ -2,6 +2,8 @@ extends Node
 
 var Players = {}
 
+enum Controller {ANALOGICO, DIRECIONAL}
+
 var peer = ENetMultiplayerPeer.new()
 
 func _ready():
@@ -57,7 +59,8 @@ func SendPlayerInformation(name, id):
 		"name" : name,
 		"id" : id,
 		"sprite": name,
-		"score": 0
+		"score": 0,
+		"control": Controller.ANALOGICO
 		}
 		
 	if multiplayer.is_server():

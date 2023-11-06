@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var coin_anim = $AnimatedSprite2D
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	coin_anim.play("Collected")
 	$AudioStreamPlayer2D.play()
 	$CoinCollision.queue_free()
