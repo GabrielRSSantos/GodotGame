@@ -5,7 +5,8 @@ extends Node2D
 var currentPlayer
 
 func _ready():
-	StartScene()
+#	StartScene()
+	pass
 
 func StartScene():
 	var index = 0

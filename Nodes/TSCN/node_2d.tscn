@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://xvpgnx2puavx"]
+
+[ext_resource type="Script" path="res://Node2D.gd" id="1_2kiq7"]
+[ext_resource type="Script" path="res://Nodes/TSCN/CharacterBody2D.gd" id="2_8iacc"]
+[ext_resource type="Texture2D" uid="uid://di6exal10ygke" path="res://icon.svg" id="2_th421"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yhm7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ps7ar"]
+radius = 175.231
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2kiq7")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(313, 242)
+script = ExtResource("2_8iacc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(84, 0)
+shape = SubResource("RectangleShape2D_3yhm7")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_th421")
+
+[node name="Aim" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Aim"]
+shape = SubResource("CircleShape2D_ps7ar")

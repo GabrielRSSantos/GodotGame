@@ -13,23 +13,22 @@
 [ext_resource type="Texture2D" uid="uid://co7fglq5wnpcg" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_up_NORMAL.png" id="9_d662t"]
 [ext_resource type="Texture2D" uid="uid://4edwehttfaj2" path="res://Sprites/drive-download-20231031T200405Z-001/ui_buttons_arrow_up_PRESSED.png" id="10_tjs01"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qeqfw"]
+size = Vector2(20, 7)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wrey6"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath("AnimatedSprite2D:animation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 properties/2/path = NodePath("AnimatedSprite2D:flip_h")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/replication_mode = 1
 properties/3/path = NodePath("AnimatedSprite2D:frame")
 properties/3/spawn = true
-properties/3/sync = true
-properties/3/watch = false
+properties/3/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_daur5"]
 atlas = ExtResource("2_iy6um")
@@ -133,35 +132,35 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r8p7"]
 size = Vector2(7, 14)
 
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_xs175"]
-
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(0, -65)
-collision_mask = 2
+collision_mask = 31
 script = ExtResource("1_rnndt")
+
+[node name="Mira" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 9
+
+[node name="miraColisao" type="CollisionShape2D" parent="Mira"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_qeqfw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wrey6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 65)
 zoom = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 57)
 sprite_frames = SubResource("SpriteFrames_q54l7")
 animation = &"falling"
 
 [node name="ColissionPlayer" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 58)
 shape = SubResource("RectangleShape2D_1r8p7")
 
 [node name="Collector" type="Area2D" parent="."]
-position = Vector2(0, 42)
-collision_mask = 3
+collision_mask = 2
 
 [node name="CollectorCollision" type="CollisionShape2D" parent="Collector"]
-position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_1r8p7")
 
 [node name="Analogico" type="CanvasLayer" parent="."]
@@ -215,9 +214,5 @@ offset_right = 238.0
 offset_bottom = 94.0
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="teste" type="CollisionShape2D" parent="."]
-position = Vector2(7, 58)
-shape = SubResource("SeparationRayShape2D_xs175")
 
 [connection signal="area_entered" from="Collector" to="." method="_on_collector_area_entered"]
