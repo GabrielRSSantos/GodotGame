@@ -185,6 +185,8 @@ position = Vector2(62, 74)
 
 [node name="PlayerTeste" parent="." instance=ExtResource("5_f7osb")]
 position = Vector2(67, 607)
+jump_height = 164
+max_time_to_peak = 1.0
 
 [node name="Coins" type="Node2D" parent="."]
 
