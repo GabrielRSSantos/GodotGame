@@ -25,7 +25,6 @@ func _physics_process(delta):
 	velocity.x = lerp( velocity.x, direction * SPEED, AIR_FRICTION)
 	
 	if not is_on_floor():
-		#velocity.y += gravity * delta
 		if Input.is_action_just_released("ui_up") and velocity.y < 0:
 			velocity.y = 0
 	
